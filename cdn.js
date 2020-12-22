@@ -130,6 +130,8 @@ function g(){
   //   modal.style.display = "block";
   // }
 
+  
+
   function closeOnModal() {
     if (event.target == document.getElementById("myModal")) {
       document.getElementById("myModal").style.display = "none";
