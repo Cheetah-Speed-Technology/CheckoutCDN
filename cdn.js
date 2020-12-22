@@ -40,6 +40,9 @@
 
   const dModalClose =`
     color: #aaaaaa;
+    position: absolute;
+    top: 15%;
+    right: 8%;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -55,89 +58,71 @@
     display: block;
     border: none;
     height: 100%;
-    width: 90%;
+    width: 100%;
     z-index: 99999;
   `
 
-// function setStylesOnElement(styles, element){
-//   document.getElementById(element).style.cssText = styles
-// }
 
-
+function mover(){ document.getElementById('button').style.cssText = dbutton2 +'opacity:0.9' }
+function moout(){ document.getElementById('button').style.cssText = dbutton2 +'opacity:1' }
 
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
   bodyDocument.setAttribute("onclick", "closeOnModal()");
   document.getElementById('button').style.cssText = dbutton2
+  document.getElementById('button').setAttribute("onmouseover", "mover()")
+  document.getElementById('button').setAttribute("onmouseout", "moout()")
 
+  // Create Modal
   createAnElement("pass", "div", ["myModal"], `display: none`)
 
 }, false);
 
-function openIframe(clientInfo) {
-  if (document.getElementById("myModal").childNodes.length == 0) {
-    // Create modal card
-    createAnElement("myModal", "div", ["myModal2"], dModalContent)
+  function openIframe(clientInfo) {
+    if (document.getElementById("myModal").childNodes.length == 0) {
+      // Create Modal-Content card
+      createAnElement("myModal", "div", ["myModal2"], dModalContent)
 
-    // Create close button
-    createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dModalClose, "&times;")
+      // Create close button
+      createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dModalClose, "&times;")
 
-    document.getElementById('myModal').style.cssText = dModal
-    // Create Iframe
-    createAnElement(
-      "myModal2",
-      "iframe",
-      ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
-      dIframe
-    )
-    document.getElementById("myModal").style.display = "block";
-  }else {
-    createAnElement(
-      "myModal2",
-      "iframe",
-      ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
-      dIframe
-    )
-    document.getElementById("myModal").style.display = "block";
-  }
-
-
-}
-
-var buttonToBinary = document.querySelector("#dClose");
-function g(){
-  document.getElementById("myModal").style.display = "none";
-  removeElement("dFrame")
-  // document.getElementById('button').style.cssText = dbutton2
-}
-
-
-
-
-  // document.getElementsByClassName("close")[0].onclick = function() {
-  //   document.getElementById("myModal").style.display = "none";
-  // }
-  // document.getElementById("dClose").addEventListener('click', function() {
-  //   console.log('eeee reach')
-  //   document.getElementById("myModal").style.display = "none";
-  // });
-  // document.getElementById("dClose").addEventListener("click", function() {
-  //   alert("Hello World!");
-  // });
-
-  // checkoutButton.onclick = function() {
-  //   modal.style.display = "block";
-  // }
-
-  
-
-  function closeOnModal() {
-    if (event.target == document.getElementById("myModal")) {
-      document.getElementById("myModal").style.display = "none";
+      document.getElementById('myModal').style.cssText = dModal
+      // Create Iframe
+      createAnElement(
+        "myModal2",
+        "iframe",
+        ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        dIframe
+      )
+      document.getElementById("myModal").style.display = "block";
+    }else {
+      createAnElement(
+        "myModal2",
+        "iframe",
+        ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        dIframe
+      )
+      document.getElementById("myModal").style.display = "block";
     }
   }
 
+  // Close Functions
+    // Close Button
+  function g(){
+    document.getElementById("myModal").style.display = "none";
+    removeElement("dFrame")
+  }
+
+  // click Modal
+  function closeOnModal() {
+    if (event.target == document.getElementById("myModal")) {
+      g()
+    }
+  }
+
+
+  // Element Creation
   function createAnElement(parentId, elementTag, elementId, style, html = null) {
     var modalDiv = document.createElement(elementTag)
     modalDiv.style.cssText = style
@@ -151,8 +136,8 @@ function g(){
 
   }
 
+  // Element Removal
   function removeElement(elementId) {
-    // Removes an element from the document
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
   }

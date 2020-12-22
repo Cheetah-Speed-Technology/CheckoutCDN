@@ -33,6 +33,17 @@ function iframeData (dataFunc){
     }
   })
 }
+  window.addEventListener('message', function(event) {
+    console.log('dE vent', event)
+    // if (event.origin == 'http://localhost:8080'){
+    //   if(event.data == 'false pass'){
+    //     dataFunc.nr()
+    //   }
+    //   if(event.data == 'false pass1'){
+    //     dataFunc.callback()
+    //   }
+    // }
+  })
 
 // function iframeData (dataFunc){
 //   window.addEventListener('message', function(event) {
