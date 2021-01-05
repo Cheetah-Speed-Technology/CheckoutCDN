@@ -1,13 +1,12 @@
   const dbutton2 = `
-    background-color: #4CAF50;
+    background-color: #1dbc86;
     border: none;
-    border-radius: 8px;
+    border-radius: 3px;
     color: white;
-    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    display: inline-flex;
+    font-size: 14px;
     transition-duration: 0.4s;
     cursor: pointer;
   `
@@ -16,7 +15,7 @@
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 20px;
     left: 0;
     top: 0;
     width: 100%;
@@ -41,7 +40,7 @@
   const dModalClose =`
     color: #aaaaaa;
     position: absolute;
-    top: 15%;
+    top: 5%;
     right: 8%;
     float: right;
     font-size: 28px;
@@ -63,14 +62,16 @@
   `
 
 
-function mover(){ document.getElementById('button').style.cssText = dbutton2 +'opacity:0.9' }
-function moout(){ document.getElementById('button').style.cssText = dbutton2 +'opacity:1' }
+function mover(){ document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:0.8` }
+function moout(){ document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:1` }
 
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
   bodyDocument.setAttribute("onclick", "closeOnModal()");
-  document.getElementById('button').style.cssText = dbutton2
+  // console.log(document.getElementById('button').attributes.style.value)
+  document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}`
+  document.getElementById('button').setAttribute("onclick", "runIframe()")
   document.getElementById('button').setAttribute("onmouseover", "mover()")
   document.getElementById('button').setAttribute("onmouseout", "moout()")
 
@@ -80,6 +81,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
   function openIframe(clientInfo) {
+    // console.log(clientInfo.src)
     if (document.getElementById("myModal").childNodes.length == 0) {
       // Create Modal-Content card
       createAnElement("myModal", "div", ["myModal2"], dModalContent)
@@ -92,17 +94,22 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dIframe
       )
+
+      window.OncloseData = clientInfo.onClose
+      iframeData(document.getElementById("myModal"), clientInfo.onClose)
       document.getElementById("myModal").style.display = "block";
     }else {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`${clientInfo.link}/?src${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dIframe
       )
+      window.OncloseData = clientInfo.onClose
+      iframeData(document.getElementById("myModal"), clientInfo.onClose)
       document.getElementById("myModal").style.display = "block";
     }
   }
@@ -112,6 +119,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
   function g(){
     document.getElementById("myModal").style.display = "none";
     removeElement("dFrame")
+    OncloseData()
   }
 
   // click Modal
@@ -143,7 +151,25 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
   }
 
 
+  window.iframeData = function(dataFunc, onclose){
+    window.addEventListener('message', function(event) {
+      if (event.origin == 'http://localhost:8080'){
+        if(event.data == 'false pass'){
+          dataFunc.style.display = "none"
+          var element = dataFunc.lastChild.children.dFrame;
+          element.parentNode.removeChild(element);
+          onclose()
+        }
+        if(event.data == 'false pass1'){
+          dataFunc.style.display = "none"
+          var element = dataFunc.lastChild.children.dFrame;
+          element.parentNode.removeChild(element);
+          window.location = `https://www.ourpass.co/shop`
+        }
+      }
+    })
 
+  }
 
   // function createModal() {
   //   var modal = document.createElement("myModal");
