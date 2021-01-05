@@ -29,7 +29,6 @@
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 80%;
     height: 80%;
     display: flex;
@@ -99,7 +98,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       )
 
       window.OncloseData = clientInfo.onClose
-      iframeData(document.getElementById("myModal"), clientInfo.onClose)
+      iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
     }else {
       createAnElement(
@@ -109,7 +108,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
         dIframe
       )
       window.OncloseData = clientInfo.onClose
-      iframeData(document.getElementById("myModal"), clientInfo.onClose)
+      iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
     }
   }
@@ -151,7 +150,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
   }
 
 
-  window.iframeData = function(dataFunc, onclose){
+  window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
       if (event.origin == 'http://localhost:8080'){
         if(event.data == 'false pass'){
@@ -164,7 +163,8 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
           element.parentNode.removeChild(element);
-          window.location = `https://www.ourpass.co/shop`
+          // window.location = `https://www.ourpass.co/shop`
+          onSuccess()
         }
       }
     })
