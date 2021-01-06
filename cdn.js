@@ -91,7 +91,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://app.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
 
@@ -102,7 +102,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://app.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
       window.OncloseData = clientInfo.onClose

@@ -12,7 +12,7 @@ function runIframe() {
     description:'Great Pass Cap',
     key:'pass_sec_test_APJn8wy3ggvBVqiI63TxCBSjqaOypT4l',
     onClose: function(){
-      window.location = `https://www.ourpass.co/shop`
+      alert('It Closed oo')
     },
     onSuccess: function(){
       alert('It Succeeded oo')
