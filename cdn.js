@@ -1,4 +1,6 @@
-  const dbutton2 = `
+
+const dStyle = {
+  dbutton2: `
     background-color: #1dbc86;
     border: none;
     border-radius: 3px;
@@ -9,9 +11,8 @@
     font-size: 14px;
     transition-duration: 0.4s;
     cursor: pointer;
-  `
-
-  const dModal =`
+  `,
+  dModal:`
     display: none;
     position: fixed;
     z-index: 1;
@@ -23,9 +24,8 @@
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
-  `
-
-  const dModalContent =`
+  `,
+ dModalContent :`
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -34,9 +34,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  `
-
-  const dModalClose =`
+  `,
+  dModalClose :`
     color: #aaaaaa;
     position: absolute;
     top: 5%;
@@ -45,31 +44,30 @@
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-  `
-
-  const dModalCloseFocus =`
+  `,
+  dModalCloseFocus :`
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  `
-  const dIframe =`
+  `,
+  dIframe :`
     display: block;
     border: none;
     height: 100%;
     width: 100%;
     z-index: 99999;
   `
+}
 
-
-function mover(){ document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:0.8` }
-function moout(){ document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:1` }
+function mover(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:0.8` }
+function moout(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:1` }
 
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
   bodyDocument.setAttribute("onclick", "closeOnModal()");
   // console.log(document.getElementById('button').attributes.style.value)
-  document.getElementById('button').style.cssText = `${dbutton2}; ${document.getElementById('button').attributes.style.value}`
+  document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}`
   document.getElementById('button').setAttribute("onclick", "runIframe()")
   document.getElementById('button').setAttribute("onmouseover", "mover()")
   document.getElementById('button').setAttribute("onmouseout", "moout()")
@@ -83,18 +81,18 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
     // console.log(clientInfo.src)
     if (document.getElementById("myModal").childNodes.length == 0) {
       // Create Modal-Content card
-      createAnElement("myModal", "div", ["myModal2"], dModalContent)
+      createAnElement("myModal", "div", ["myModal2"], dStyle.dModalContent)
 
       // Create close button
-      createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dModalClose, "&times;")
+      createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dStyle.dModalClose, "&times;")
 
-      document.getElementById('myModal').style.cssText = dModal
+      document.getElementById('myModal').style.cssText = dStyle.dModal
       // Create Iframe
       createAnElement(
         "myModal2",
         "iframe",
         ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
-        dIframe
+        dStyle.dIframe
       )
 
       window.OncloseData = clientInfo.onClose
@@ -105,7 +103,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
         "myModal2",
         "iframe",
         ["dFrame", ["src",`${clientInfo.link}/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
-        dIframe
+        dStyle.dIframe
       )
       window.OncloseData = clientInfo.onClose
       iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
@@ -152,7 +150,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
-      if (event.origin == 'http://localhost:8080'){
+      if (event.origin == 'https://app.ourpass.co'){
         if(event.data == 'false pass'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
@@ -170,10 +168,3 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
     })
 
   }
-
-  // function createModal() {
-  //   var modal = document.createElement("myModal");
-  //   modal.setAttribute( "id", `myModal` );
-  //   modal.style.cssText = dModal
-  //   document.body.appendChild(modal)
-  // }

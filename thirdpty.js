@@ -2,7 +2,7 @@
 
 function runIframe() {
   const clientInfo  = {
-    link:'http://localhost:8080/view',
+    link:'https://app.ourpass.co/view',
     src: 'https://raw.githubusercontent.com/Cheetah-Speed-Technology/website_dstore/master/Cap-front1.png',
     amount: '1',
     url: 'jumia.com.ng',
