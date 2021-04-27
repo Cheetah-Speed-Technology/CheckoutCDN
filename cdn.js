@@ -91,7 +91,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://app.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://beta-pass.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
 
@@ -102,7 +102,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://app.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://beta-pass.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
       window.OncloseData = clientInfo.onClose
@@ -150,7 +150,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
-      if (event.origin == 'https://app.ourpass.co'){
+      if (event.origin == 'https://beta-pass.ourpass.co/checkout/v3'){
         if(event.data == 'false pass'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
