@@ -2,15 +2,15 @@
 
 function runIframe() {
   const clientInfo  = {
-    link:'https://app.ourpass.co/view',
+    link:'https://staging-pass.ourpass.co/view',
     src: 'https://raw.githubusercontent.com/Cheetah-Speed-Technology/website_dstore/master/Cap-front1.png',
-    amount: '1',
+    amount: '10',
     url: 'jumia.com.ng',
     name:'Cap',
-    email: 'danyadegoke@gmail.com',
+    email: 'bayoopesanya@gmail.com',
     qty:'1',
     description:'Great Pass Cap',
-    key:'pass_sec_test_APJn8wy3ggvBVqiI63TxCBSjqaOypT4l',
+    key:'pass_sec_test_ewxaVQBbr5JTt6P2tpIUUAZGdpqzRckV',
     onClose: function(){
       alert('It Closed oo')
     },

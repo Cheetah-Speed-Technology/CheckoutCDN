@@ -91,7 +91,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://beta-pass.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://merchant-sandbox.ourpass.co/checkout/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
 
@@ -102,7 +102,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://beta-pass.ourpass.co/view/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`https://merchant-sandbox.ourpass.co/checkout/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
         dStyle.dIframe
       )
       window.OncloseData = clientInfo.onClose
@@ -150,10 +150,18 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
-      if (event.origin == 'https://beta-pass.ourpass.co/checkout/v3'){
+      console.log('event.origin/data: ',{
+        origin: event.origin,
+        data: event.data
+      })
+      if (event.origin == 'https://merchant-sandbox.ourpass.co'){
         if(event.data == 'false pass'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
+          console.log('event.data: ',{
+            element: element,
+            dataFunc: dataFunc
+          })
           element.parentNode.removeChild(element);
           onclose()
         }
