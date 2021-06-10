@@ -150,18 +150,10 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
-      console.log('event.origin/data: ',{
-        origin: event.origin,
-        data: event.data
-      })
       if (event.origin == 'https://merchant-sandbox.ourpass.co'){
         if(event.data == 'false pass'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
-          console.log('event.data: ',{
-            element: element,
-            dataFunc: dataFunc
-          })
           element.parentNode.removeChild(element);
           onclose()
         }
