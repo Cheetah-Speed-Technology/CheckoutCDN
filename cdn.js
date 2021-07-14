@@ -1,5 +1,15 @@
-
+const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
 const dStyle = {
+  loaderWrapper: `
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  `,
+  loaderImg: `
+    height: 100px;
+    width: 100px;
+    animation: loader 1s 1s infinite;
+  `,
   dbutton2: `
     background-color: #1dbc86;
     border: none;
@@ -51,7 +61,7 @@ const dStyle = {
     cursor: pointer;
   `,
   dIframe :`
-    display: block;
+    display: none;
     border: none;
     height: 100%;
     width: 100%;
@@ -61,7 +71,11 @@ const dStyle = {
 
 function mover(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:0.8` }
 function moout(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:1` }
-
+function handleIframeLoaded() {
+  this.removeEventListener('load', handleIframeLoaded, true)
+  document.getElementById("loaderImg").style.display = "none";
+  document.getElementById("dFrame").style.display = "block";
+}
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
@@ -85,10 +99,29 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
       // Create close button
       createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dStyle.dModalClose, "&times;")
+      // create loader
+      createAnElement('myModal2', 'div', ['loaderWrapper'], dStyle.loaderWrapper);
+      createAnElement('loaderWrapper', 'img', ['loaderImg'], dStyle.loaderImg);
+      document.getElementById('loaderImg').setAttribute('src', 'https://www.ourpass.co/favicon.ico')
+      document.getElementById("loaderImg").animate([
+        // keyframes
+        { transform: 'scale(0.7)' },
+        { transform: 'scale(0.8)' },
+        { transform: 'scale(0.7)' }
+      ], {
+        // timing options
+        duration: 1000,
+        iterations: Infinity
+      });
+
+      if (isMobileDevice) {
+        document.getElementById('myModal2').style.width = '100%'
+        document.getElementById('myModal2').style.padding = '0'
+      }
 
       document.getElementById('myModal').style.cssText = dStyle.dModal
       // Create Iframe
-      createAnElement(
+      var iframe = createAnElement(
         "myModal2",
         "iframe",
         ["dFrame", ["src",`https://merchant-sandbox.ourpass.co/checkout/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
@@ -98,6 +131,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       window.OncloseData = clientInfo.onClose
       iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
+      iframe.addEventListener('load', handleIframeLoaded, true)
     }else {
       createAnElement(
         "myModal2",
@@ -138,7 +172,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       var dParentElement = document.getElementById("button").parentNode
       dParentElement.appendChild(modalDiv);
     } else document.getElementById(parentId).appendChild(modalDiv);
-
+    return modalDiv
   }
 
   // Element Removal
