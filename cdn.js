@@ -1,4 +1,7 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
+// const BASE_URL = 'https://merchant-sandbox.ourpass.co'
+const BASE_URL = 'http://localhost:8001'
+
 const dStyle = {
   loaderWrapper: `
     height: 100vh;
@@ -92,7 +95,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
   function openIframe(clientInfo) {
-    // console.log(clientInfo.src)
+    const items = clientInfo.items ? JSON.stringify(clientInfo.items) : '';
     if (document.getElementById("myModal").childNodes.length == 0) {
       // Create Modal-Content card
       createAnElement("myModal", "div", ["myModal2"], dStyle.dModalContent)
@@ -124,7 +127,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       var iframe = createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://merchant-sandbox.ourpass.co/checkout/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`${BASE_URL}/checkout/?src=${clientInfo.src}&items=${items}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&api_key=${clientInfo.api_key}`]],
         dStyle.dIframe
       )
 
@@ -132,11 +135,11 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
       iframe.addEventListener('load', handleIframeLoaded, true)
-    }else {
+    } else {
       createAnElement(
         "myModal2",
         "iframe",
-        ["dFrame", ["src",`https://merchant-sandbox.ourpass.co/checkout/?src=${clientInfo.src}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&key=${clientInfo.key}`]],
+        ["dFrame", ["src",`${BASE_URL}/checkout/?src=${clientInfo.src}&items=${items}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&api_key=${clientInfo.api_key}`]],
         dStyle.dIframe
       )
       window.OncloseData = clientInfo.onClose
@@ -184,7 +187,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
-      if (event.origin == 'https://merchant-sandbox.ourpass.co'){
+      if (event.origin == BASE_URL){
         if(event.data == 'false pass'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
