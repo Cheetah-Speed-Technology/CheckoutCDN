@@ -1,6 +1,6 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
-// const BASE_URL = 'https://merchant-sandbox.ourpass.co'
-const BASE_URL = 'http://localhost:8001'
+const BASE_URL = 'https://merchant-sandbox.ourpass.co'
+// const BASE_URL = 'http://localhost:8001'
 
 const dStyle = {
   loaderWrapper: `
