@@ -12,6 +12,7 @@ const dStyle = {
     height: 100px;
     width: 100px;
     animation: loader 1s 1s infinite;
+    display: block;
   `,
   dbutton2: `
     background-color: #1dbc86;
@@ -74,10 +75,12 @@ const dStyle = {
 
 function mover(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:0.8` }
 function moout(){ document.getElementById('button').style.cssText = `${dStyle.dbutton2}; ${document.getElementById('button').attributes.style.value}; opacity:1` }
+
 function handleIframeLoaded() {
   this.removeEventListener('load', handleIframeLoaded, true)
   document.getElementById("loaderImg").style.display = "none";
   document.getElementById("dFrame").style.display = "block";
+  console.log('HANDLE LOAD')
 }
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
@@ -94,6 +97,28 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
 }, false);
 
+  function handleAnimation() {
+    const loader = document.getElementById("loaderImg");
+    if (!loader) {
+      // create loader
+      createAnElement('myModal2', 'div', ['loaderWrapper'], dStyle.loaderWrapper);
+      createAnElement('loaderWrapper', 'img', ['loaderImg'], dStyle.loaderImg);
+      document.getElementById('loaderImg').setAttribute('src', 'https://www.ourpass.co/favicon.ico')
+    }
+    document.getElementById('loaderImg').style.display = 'block'
+    document.getElementById('loaderImg').animate([
+      // keyframes
+      { transform: 'scale(0.7)' },
+      { transform: 'scale(0.8)' },
+      { transform: 'scale(0.7)' }
+    ], {
+      // timing options
+      duration: 1000,
+      iterations: Infinity
+    });
+    // end animation
+  }
+
   function openIframe(clientInfo) {
     const items = clientInfo.items ? JSON.stringify(clientInfo.items) : '';
     if (document.getElementById("myModal").childNodes.length == 0) {
@@ -102,21 +127,8 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
       // Create close button
       createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dStyle.dModalClose, "&times;")
-      // create loader
-      createAnElement('myModal2', 'div', ['loaderWrapper'], dStyle.loaderWrapper);
-      createAnElement('loaderWrapper', 'img', ['loaderImg'], dStyle.loaderImg);
-      document.getElementById('loaderImg').setAttribute('src', 'https://www.ourpass.co/favicon.ico')
-      document.getElementById("loaderImg").animate([
-        // keyframes
-        { transform: 'scale(0.7)' },
-        { transform: 'scale(0.8)' },
-        { transform: 'scale(0.7)' }
-      ], {
-        // timing options
-        duration: 1000,
-        iterations: Infinity
-      });
 
+      handleAnimation()
       if (isMobileDevice) {
         document.getElementById('myModal2').style.width = '100%'
         document.getElementById('myModal2').style.padding = '0'
@@ -136,7 +148,10 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       document.getElementById("myModal").style.display = "block";
       iframe.addEventListener('load', handleIframeLoaded, true)
     } else {
-      createAnElement(
+
+      handleAnimation()
+
+      var iframe = createAnElement(
         "myModal2",
         "iframe",
         ["dFrame", ["src",`${BASE_URL}/checkout/?src=${clientInfo.src}&items=${items}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&api_key=${clientInfo.api_key}`]],
@@ -145,6 +160,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       window.OncloseData = clientInfo.onClose
       iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
+      iframe.addEventListener('load', handleIframeLoaded, true)
     }
   }
 
@@ -188,7 +204,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
       if (event.origin == BASE_URL){
-        if(event.data == 'false pass'){
+        if(event.data == 'false pass') {
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
           element.parentNode.removeChild(element);
