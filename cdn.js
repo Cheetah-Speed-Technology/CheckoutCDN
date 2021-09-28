@@ -1,6 +1,6 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
-const BASE_URL = 'https://merchant-sandbox.ourpass.co'
-// const BASE_URL = 'http://localhost:8001'
+// const BASE_URL = 'https://merchant-sandbox.ourpass.co'
+const BASE_URL = 'http://localhost:8001'
 
 const dStyle = {
   loaderWrapper: `
@@ -203,6 +203,8 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
+
+      console.log(event.data)
       if (event.origin == BASE_URL){
         if(event.data == 'false pass') {
           dataFunc.style.display = "none"
@@ -210,6 +212,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
           element.parentNode.removeChild(element);
           onclose()
         }
+
         if(event.data == 'false pass1'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
