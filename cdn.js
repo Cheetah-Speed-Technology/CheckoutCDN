@@ -42,22 +42,31 @@ const dStyle = {
  dModalContent :`
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
-    width: 80%;
-    height: 80%;
+    padding: 0px;
+   width: 340px;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
   `,
   dModalClose :`
-    color: #aaaaaa;
-    position: absolute;
-    top: 5%;
-    right: 8%;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+  display:none;
+    // color: #aaaaaa;
+    // position: absolute;
+    // top: 6%;
+    // right: 40%;
+    // float: right;
+    // font-size: 18px;
+    // font-weight: bold;
+    // cursor: pointer;
+    // color:#ffffff;
+    // background: #C6C6C6;
+    // border-radius: 50%;
+    // height: 25px;
+    // width: 25px;
+    // display: grid;
+    // place-items: center;
   `,
   dModalCloseFocus :`
     color: #000;
@@ -177,6 +186,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
     if (event.target == document.getElementById("myModal")) {
       g()
     }
+
   }
 
 

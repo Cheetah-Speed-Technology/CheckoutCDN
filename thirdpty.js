@@ -7,7 +7,7 @@ function runIframe() {
     amount: '10',
     url: 'jumia.com.ng',
     name:'Cap',
-    email: 'akinwizg.uy@gmail.com',
+    email: '',
     qty:'1',
     description:'Great Pass Cap',
     items: [
