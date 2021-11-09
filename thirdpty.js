@@ -5,9 +5,9 @@ function runIframe() {
     link:'https://staging-pass.ourpass.co/view',
     src: 'https://raw.githubusercontent.com/Cheetah-Speed-Technology/website_dstore/master/Cap-front1.png',
     amount: '10',
-    url: 'jumia.com.ng',
+    url: 'https://jumia.com.ng',
     name:'Cap',
-    email: 'bayoopesanya@gmail.com',
+    email: '',
     qty:'1',
     description:'Great Pass Cap',
     items: [
@@ -30,7 +30,8 @@ function runIframe() {
         description:'Great Pass Cap',
       },
     ],
-    api_key:'pass_sec_test_ewxaVQBbr5JTt6P2tpIUUAZGdpqzRckV',
+    api_key: 'pass_sec_test_2WEzJfgg4mpbY4XkBaibd9ZnERo6bHBP',
+    
     onClose: function(){
       alert('It Closed oo')
     },

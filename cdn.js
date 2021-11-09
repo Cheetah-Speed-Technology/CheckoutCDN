@@ -1,6 +1,6 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
-const BASE_URL = 'https://merchant-sandbox.ourpass.co'
-// const BASE_URL = 'http://localhost:8001'
+// const BASE_URL = 'https://merchant-sandbox.ourpass.co'
+const BASE_URL = 'http://localhost:8001'
 
 const dStyle = {
   loaderWrapper: `
@@ -40,24 +40,33 @@ const dStyle = {
     background-color: rgba(0,0,0,0.4);
   `,
  dModalContent :`
-    background-color: #fefefe;
+    // background-color: #fefefe;
     margin: auto;
-    padding: 20px;
-    width: 80%;
-    height: 80%;
+    padding: 0px;
+   width: 340px;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
   `,
   dModalClose :`
     color: #aaaaaa;
-    position: absolute;
-    top: 5%;
-    right: 8%;
+    position: relative;
+    top: -42%;
+    right: -300px;
     float: right;
-    font-size: 28px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    color:#ffffff;
+    background: #C6C6C6;
+    border-radius: 50%;
+    height: 25px;
+    width: 27px;
+    display: grid;
+    place-items: center;
+    z-index: 9999999;
   `,
   dModalCloseFocus :`
     color: #000;
@@ -177,6 +186,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
     if (event.target == document.getElementById("myModal")) {
       g()
     }
+
   }
 
 
@@ -203,6 +213,8 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   window.iframeData = function(dataFunc, onclose, onSuccess){
     window.addEventListener('message', function(event) {
+
+      console.log(event.data)
       if (event.origin == BASE_URL){
         if(event.data == 'false pass') {
           dataFunc.style.display = "none"
@@ -210,6 +222,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
           element.parentNode.removeChild(element);
           onclose()
         }
+
         if(event.data == 'false pass1'){
           dataFunc.style.display = "none"
           var element = dataFunc.lastChild.children.dFrame;
