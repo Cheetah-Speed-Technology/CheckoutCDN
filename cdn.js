@@ -40,7 +40,7 @@ const dStyle = {
     background-color: rgba(0,0,0,0.4);
   `,
  dModalContent :`
-    background-color: #fefefe;
+    // background-color: #fefefe;
     margin: auto;
     padding: 0px;
    width: 340px;
@@ -51,22 +51,22 @@ const dStyle = {
     border-radius: 8px;
   `,
   dModalClose :`
-  display:none;
-    // color: #aaaaaa;
-    // position: absolute;
-    // top: 6%;
-    // right: 40%;
-    // float: right;
-    // font-size: 18px;
-    // font-weight: bold;
-    // cursor: pointer;
-    // color:#ffffff;
-    // background: #C6C6C6;
-    // border-radius: 50%;
-    // height: 25px;
-    // width: 25px;
-    // display: grid;
-    // place-items: center;
+    color: #aaaaaa;
+    position: relative;
+    top: -42%;
+    right: -300px;
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color:#ffffff;
+    background: #C6C6C6;
+    border-radius: 50%;
+    height: 25px;
+    width: 27px;
+    display: grid;
+    place-items: center;
+    z-index: 9999999;
   `,
   dModalCloseFocus :`
     color: #000;
