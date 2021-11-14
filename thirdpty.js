@@ -5,7 +5,7 @@ function runIframe() {
     link:'https://staging-pass.ourpass.co/view',
     src: 'https://raw.githubusercontent.com/Cheetah-Speed-Technology/website_dstore/master/Cap-front1.png',
     amount: '10',
-    url: 'https://jumia.com.ng',
+    url: 'https://oministore.com',
     name:'Cap',
     email: '',
     qty:'1',
@@ -33,10 +33,10 @@ function runIframe() {
     api_key: 'pass_sec_test_2WEzJfgg4mpbY4XkBaibd9ZnERo6bHBP',
     
     onClose: function(){
-      alert('It Closed oo')
+      alert('Widget Closed')
     },
     onSuccess: function(){
-      alert('It Succeeded oo')
+      alert('Payment Successful')
     }
   }
   openIframe(clientInfo)
