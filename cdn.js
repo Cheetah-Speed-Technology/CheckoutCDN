@@ -1,6 +1,6 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
 // const BASE_URL = 'https://merchant-sandbox.ourpass.co'
-const BASE_URL = 'http://localhost:8001'
+const BASE_URL = 'http://127.0.0.1:8001'
 
 const dStyle = {
   loaderWrapper: `
@@ -15,16 +15,22 @@ const dStyle = {
     display: block;
   `,
   dbutton2: `
-    background-color: #1dbc86;
-    border: none;
-    border-radius: 3px;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-flex;
-    font-size: 14px;
-    transition-duration: 0.4s;
-    cursor: pointer;
+    backgroundColor: "#1DBC86";
+    border: "none";
+    borderRadius: "10px";
+    color: "white";
+    textAlign: "center";
+    textDecoration: "none";
+    height: "50px";
+    width: "250px";
+    display: "inline-flex";
+    alignItems: 'center';
+    justifyContent: 'center';
+    fontSize: "14px";
+    transitionDuration: "0.4s";
+    cursor: "pointer";
+    padding: "10px 32px";
+    opacity: "1";
   `,
   dModal:`
     display: none;
@@ -166,6 +172,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
         ["dFrame", ["src",`${BASE_URL}/checkout/?src=${clientInfo.src}&items=${items}&amount=${clientInfo.amount}&url=${clientInfo.url}&name=${clientInfo.name}&email=${clientInfo.email}&qty=${clientInfo.qty}&description=${clientInfo.description}&api_key=${clientInfo.api_key}`]],
         dStyle.dIframe
       )
+     
       window.OncloseData = clientInfo.onClose
       iframeData(document.getElementById("myModal"), clientInfo.onClose, clientInfo.onSuccess)
       document.getElementById("myModal").style.display = "block";
@@ -194,6 +201,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
   function createAnElement(parentId, elementTag, elementId, style, html = null) {
     var modalDiv = document.createElement(elementTag)
     modalDiv.style.cssText = style
+    modalDiv.setAttribute('allow', `geolocation ${BASE_URL}`) // use case
     if(html) modalDiv.innerHTML = html;
     modalDiv.setAttribute("id", elementId[0]);
     if(elementId.length > 1)modalDiv.setAttribute(`${elementId[1][0]}`, `${elementId[1][1]}`);
