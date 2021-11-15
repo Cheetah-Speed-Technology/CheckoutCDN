@@ -31,6 +31,7 @@ function runIframe() {
       },
     ],
     api_key: 'pass_sec_test_2WEzJfgg4mpbY4XkBaibd9ZnERo6bHBP',
+    // api_key:'pass_sec_test_someTestAPIKEY',
     
     onClose: function(){
       alert('Widget Closed')
