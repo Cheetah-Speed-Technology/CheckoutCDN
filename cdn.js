@@ -238,6 +238,10 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
           // window.location = `https://www.ourpass.co/shop`
           onSuccess()
         }
+
+        if (event.data == 'remove_close') {
+          removeElement("dClose")
+        }
       }
     })
 
