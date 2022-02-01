@@ -97,6 +97,7 @@ function handleIframeLoaded() {
   document.getElementById("dFrame").style.display = "block";
   console.log('HANDLE LOAD')
 }
+
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
@@ -241,6 +242,11 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
         if (event.data == 'remove_close') {
           removeElement("dClose")
+        }
+
+        if (event.data == 'closeiframe') {
+          document.getElementById('myModal').style.cssText = null
+          removeElement("myModal2")
         }
       }
     })
