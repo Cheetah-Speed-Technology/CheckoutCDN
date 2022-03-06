@@ -1,6 +1,6 @@
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
 // const BASE_URL = 'https://merchant-sandbox.ourpass.co'
-const BASE_URL = 'http://127.0.0.1:8001'
+const BASE_URL = 'http://127.0.0.1:8001' // pass merchant
 
 const dStyle = {
   loaderWrapper: `
@@ -36,7 +36,7 @@ const dStyle = {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 20px;
+    padding-top: 10%;
     left: 0;
     top: 0;
     width: 100%;
@@ -46,11 +46,11 @@ const dStyle = {
     background-color: rgba(0,0,0,0.4);
   `,
  dModalContent :`
-    // background-color: #fefefe;
+    // background-color: #ffffff;
     margin: auto;
     padding: 0px;
-   width: 340px;
-    height: 90%;
+    width: 385px;
+    height: 630px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +70,7 @@ const dStyle = {
     border-radius: 50%;
     height: 25px;
     width: 27px;
-    display: grid;
+    display: grid;  
     place-items: center;
     z-index: 9999999;
   `,
@@ -97,6 +97,7 @@ function handleIframeLoaded() {
   document.getElementById("dFrame").style.display = "block";
   console.log('HANDLE LOAD')
 }
+
 window.onload = document.addEventListener('DOMContentLoaded', function() {
 
   var bodyDocument = document.getElementsByTagName("body")[0]
@@ -141,7 +142,7 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
       createAnElement("myModal", "div", ["myModal2"], dStyle.dModalContent)
 
       // Create close button
-      createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dStyle.dModalClose, "&times;")
+      // createAnElement("myModal2", "span", ["dClose", ["onclick","g()"]], dStyle.dModalClose, "&times;")
 
       handleAnimation()
       if (isMobileDevice) {
@@ -241,6 +242,11 @@ window.onload = document.addEventListener('DOMContentLoaded', function() {
 
         if (event.data == 'remove_close') {
           removeElement("dClose")
+        }
+
+        if (event.data == 'closeiframe') {
+          document.getElementById('myModal').style.cssText = null
+          removeElement("myModal2")
         }
       }
     })
