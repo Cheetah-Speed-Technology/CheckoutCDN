@@ -1,0 +1,42 @@
+{
+    "qty": 1,
+    "weight": 2,
+    "name": "We are Gods",
+    "url": "https://paylidate.com",
+    "amount": 1,
+    "api_key": "pass_sec_test_2WEzJfgg4mpbY4XkBaibd9ZnERo6bHBP",
+    "user_id": 227,
+    "buyerWalletId": 45,
+    "currency": "NGN",
+    "src": "cloudinary.com/ourpass-co/image/upload/v1619516915/product_images/Screen_Shot_2021-04-20_at_7.27.15_AM_hae8da.png",
+    "description": "Logistics tester 1",
+    "wallet": "wallet",
+    "delivery": "noDelivery",
+    "reference": "first_A_410",
+    "metadata": "{\"name\":\"John\", \"age\":30, \"city\":\"New York\"}",
+    "items": [
+        {
+            "itemAmount": 1,
+            "itemName": "love1-Sex-Toy-2-for-Deji",
+            "itemWeight": 10,
+            "itemQuantity": 10,
+            "imageUrl": "https://res.cloudinary.com/ourpass-co/image/upload/v1619516915/product_images/Screen_Shot_2021-04-20_at_7.27.15_AM_hae8da.png"
+        },
+        {
+            "itemAmount": 1,
+            "itemName": "Boy Only Boy-Gal AyoDeji-On-Top",
+            "itemWeight": 112,
+            "itemQuantity": 10,
+            "imageUrl": "https://res.cloudinary.com/ourpass-co/image/upload/v1619516915/product_images/Screen_Shot_2021-04-20_at_7.27.15_AM_hae8da.png"
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+
