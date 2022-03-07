@@ -30,7 +30,7 @@ function runIframe() {
         description:'Great Pass Cap',
       },
     ],
-    api_key: 'pass_sec_test_L1Isb2KI0mxt9GIDArgus6kQjsZP1VBG',
+    api_key: 'pass_sec_live_lcFn6CrCkLDHd9Z0LHa5V1nj9QvDSNAz',
     // api_key:'pass_sec_test_someTestAPIKEY',
     
     onClose: function(){
